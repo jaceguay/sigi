@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Sistema viário, Munic. Itajaí</title>
+
+<link rel="stylesheet" href="lib/leaflet.css" />
+<link rel="stylesheet" href="lib/Leaflet.PolylineMeasure.css" />
+<script src="lib/leaflet.js"></script>
+<script src="lib/Leaflet.PolylineMeasure.js"></script>
+<script src="data/sviario.geojson"></script>
+
+<style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; z-index: 1; }    
+</style>
+
+</head>
+
+<body>
+
+	<div id="map"></div>
+
+<script>
+
+	//div do mapa
+	var map = new L.Map('map', {
+		zoom: 14,
+		minZoom: 12,
+		maxZoom: 17,	
+		center: new L.latLng([-26.9131, -48.6780])
+	});
+
+	//Ferramenta medidas
+	L.control.polylineMeasure({position:'topleft', imperial:false, clearMeasurementsOnStop: false, showMeasurementsClearControl: true}).addTo(map);
+
+	//Mapa base
+	map.addLayer(new L.TileLayer('tiles/{z}/{x}/{y}.png'));	
+
+	//camadas
+	//+camada sistema viário
+	var sviario = L.geoJson( sviario, {
+	style: function (feature) {
+                return {
+                    opacity : 0,
+					weight : 10
+                };
+            },
+    onEachFeature: function (feature, layer) {
+		popupOptions = {maxWidth: 400};
+        layer.bindPopup(
+		"<b>Nome:</b> " + feature.properties.nomevias + "<br>" +
+		"<b>Lei:</b> " + feature.properties.lei  + "<br>" +
+		"<b>Caixa total:</b> " + feature.properties.caixatotal  + "<br>" +
+		"<b>Caixa via:</b> " + feature.properties.caixavia  + "<br>" +
+		"<b>Passeios:</b> " + feature.properties.passeionl  + "<b> e </b>" + feature.properties.passeioso
+		,popupOptions);
+        }	
+	}).addTo(map);
+
+</script>
+
+</body>
+
+</html>
