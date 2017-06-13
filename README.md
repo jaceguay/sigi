@@ -1,7 +1,6 @@
-## Bem vindo.
+![Brasão](images/brasao.png)
+# SMU - Mapas
 
-Abaixo os mapas disponíveis:
+## Abaixo os mapas disponíveis:
 
-- [Sistema viário](https://jaceguay.github.io/sigi/sistemaviario.html)
-
-![Brasão](sigi/images/brasao.png )
+* [Sistema viário](https://jaceguay.github.io/sigi/sistemaviario.html)
